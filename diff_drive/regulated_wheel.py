@@ -32,7 +32,6 @@ class RegulatedWheel(Motor, SentientWheel):
     def regulate_velocity(self, timer):
         if self.ref_vel == 0.0 or self.reg_counter > self.reg_freq:
             self.short_brake()
-            self.prev_err = 0.0
         else:
             err = self.ref_vel - self.lin_vel
             self.sum_err += err
@@ -52,7 +51,7 @@ class RegulatedWheel(Motor, SentientWheel):
         Args:
             reference_value
         """
-        if reference_value is not self.ref_vel:
+        if reference_value != self.ref_vel:
             self.prev_err = 0.0
             self.sum_err = 0.0
         self.ref_vel = reference_value
