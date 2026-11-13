@@ -1,27 +1,31 @@
-# Make sure you've uploaded `encoded_motor_driver.py` to the Pico board
+# Make sure you've uploaded `diff_drive` directory to the Pico board
 
 
-from encoded_motor_driver import EncodedMotorDriver
+from time import sleep
+
 from machine import Pin
-from time import sleep  
+
+from diff_drive.motor import Motor
+from diff_drive.sentient_wheel import SentientWheel
 
 # SETUP
-emd = EncodedMotorDriver((9, 11, 10), (16, 17))  # left motor, encoders on pins 7 and 8
+m = Motor(9, 11, 10)  # right
+sw = SentientWheel(16, 17)  # right
 STBY = Pin(12, Pin.OUT)
 STBY.off()
 # Constants
+TARGET_REVS = 2
 CPR = 28
-GEAR_RATIO = 98.5
-TARGET_REVS = 10
-TARGET_COUNTS = CPR * GEAR_RATIO * TARGET_REVS 
+GEAR_RATIO = 100
+TARGET_COUNTS = CPR * GEAR_RATIO * TARGET_REVS
 
 # LOOP
 STBY.on()  # enable motor driver
-while emd.encoder_counts < TARGET_COUNTS:
-    emd.forward(0.3)
-    print(f"f, enc_cnt: {emd.encoder_counts}")
-    sleep(0.001)  # check every 0.01 second
-emd.stop()
+m.forward(0.4)
+while sw.counts < TARGET_COUNTS:
+    print(f"Encoder counts: {sw.counts}")
+    sleep(0.01)
+m.short_brake()
 print("motor stopped.")
 sleep(1)
 STBY.off()  # disable motor driver

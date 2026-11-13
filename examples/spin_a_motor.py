@@ -1,11 +1,13 @@
-# Make sure you've uploaded `motor_driver.py` to the Pico board
+# Make sure you've uploaded `diff_drive` directory to the Pico board
 
-from motor_driver import MotorDriver
-from machine import Pin
 from time import sleep
 
+from machine import Pin
+
+from diff_drive.motor import Motor
+
 # SETUP
-md = MotorDriver(15, 13, 14)  # left motor
+md = Motor(15, 13, 14)  # left motor
 STBY = Pin(12, Pin.OUT)
 STBY.off()
 
