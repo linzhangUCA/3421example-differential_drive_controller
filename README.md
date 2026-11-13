@@ -1,4 +1,4 @@
-# 3421example-motor_control
+# Software Stack of Differential Drive Control
 
 ## Example Wiring Diagram
 ### 1. Motors Only
@@ -7,49 +7,34 @@
 ### 2. Motors + Encoders
 ![encoder_wiring](images/encoder_motor_pico.jpg)
 
+## Installation
+
+Upload [`diff_drive`](./diff_drive/) **directory** to the Pico board.
+> [!NOTE]
+> Contents:
+> - [`motor.py`](./diff_drive/motor.py): spins a single motor.
+> - [`encoder.py`](./diff_drive/encoder.py): counts encoder signal changes.
+> - [`sentient_wheel.py`](./diff_drive/sentient_wheel.py): measures velocity of a wheel.
+> - [`regulated_wheel.py`](./diff_drive/regulated_wheel.py): controls a wheel's velocity through PID control.
+> - [`diff_drive_controller.py`](./diff_drive/diff_drive_controller.py): sets and monitors velocity of a differential drive mobile robot.
+
 ## Usage
-
-Upload `.py` files from root of this repository to the Pico board.
->
-> - [`motor_driver.py`](motor_driver.py)
-> - [`dual_motor_driver.py`](dual_motor_driver.py)
-> - [`encoded_motor_driver.py`](encoded_motor_driver.py)
-> - [`sentient_wheel_driver.py`](sentient_wheel_driver.py)
-> - [`wheel_controller.py`](wheel_controller.py)
-> - [`diff_drive_controller.py`](diff_drive_controller.py)
-
-Import the desired class to a **MicroPython** script to further develop it.
-
-1. Spin a single motor:
+Import the desired class to a **MicroPython** script to develop applications.
 
 ```Python
-from motor_driver import MotorDriver
-```
+from diff_drive.diff_drive_controller import DiffDriveController
 
-2. Spin two motors together:
-
-```Python
-from dual_motor_driver import DualMotorDriver
-```
-
-3. Count encoder pulses:
-
-```Python
-from encoded_motor_driver import EncodedMotorDriver
-```
-
-4. Measure wheel linear and angular velocity:
-```Python
-from sentient_wheel_driver import SentientWheelDriver
-```
-
-5. Regulate wheel linear and angular velocity via PID control:
-```Python
-from wheel_controller import WheelController
-```
-
-6. Set and monitor velocity of the differential drive base:
-```Python
-from diff_drive_controller import DiffDriveController
+# SETUP
+robot = DiffDriveController(
+    left_wheel_configs={
+        "motor_pin_ids": (9, 11, 10),
+        "encoder_pin_ids": (16, 17),
+    },
+    right_wheel_configs={
+        "motor_pin_ids": (15, 13, 14),
+        "encoder_pin_ids": (18, 19),
+    },
+    enable_pin_id=12,
+)
 ```
 
