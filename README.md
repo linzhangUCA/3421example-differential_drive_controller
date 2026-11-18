@@ -2,7 +2,7 @@
 
 ## Example Wiring Diagram
 ### 1. Motors Only
-![motor_wiring](images/pico_tb6612.jpg)
+![motor_wiring](./assests/images/pico_tb6612.png)
 
 ### 2. Motors + Encoders
 ![encoder_wiring](images/encoder_motor_pico.jpg)
