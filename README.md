@@ -2,10 +2,10 @@
 
 ## Example Wiring Diagram
 ### 1. Motors Only
-![motor_wiring](./assests/images/pico_tb6612.png)
+![motor_wiring](./assests/images/motor_wiring.png)
 
 ### 2. Motors + Encoders
-![encoder_wiring](images/encoder_motor_pico.jpg)
+![encoder_wiring](./assests/images/motor_encoder_wiring.png)
 
 ## Installation
 
